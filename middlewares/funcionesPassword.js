@@ -1,47 +1,40 @@
 const { log } = require("console");
-const crypto = require("crypto");
-
+const crypto=require("crypto");
 
 function encriptarPassword(password) {
-
     const salt = crypto.randomBytes(32).toString("hex");
-    // console.log(salt);
-
-
-    const hash = crypto.scryptSync(password, salt, 100000, 64, "sha512").toString("hex");
-    // console.log(hash); 
-
+    //console.log(salt);
+    const hash = crypto.scryptSync(password, salt, 10000, 64, "sha512").toString("hex");
+    //console.log(hash);
     return {
         salt,
-        hash,
+        hash
     }
 }
 
 function validarPassword(password, salt, hash) {
-
-    const hashEvaluar = crypto.scryptSync(password, salt, 100000, 64, "sha512").toString("hex");
-
-
-
+    //console.log(password);
+    
+    const hashEvaluar = crypto.scryptSync(password, salt, 10000, 64, "sha512");
+    //Se pueden hacer comparaciones directas sin requerir de la funcion condicional (if, switch)
+    //console.log(5==3);
     return hashEvaluar == hash;
 }
 
-
-function usuarioActualizado() {
-
+function usuarioAutorizado(){
+    // Lógica futura para actualizar un usuario
 }
 
-
-function adminAutorizado() {
-
+function adminAutorizado(){
+    // Lógica futura para verificar permisos de administrador
 }
-
 
 module.exports = {
     encriptarPassword,
     validarPassword,
-    usuarioActualizado,
-    adminAutorizado,
+    usuarioAutorizado,
+    adminAutorizado
 }
 
-
+//validarPassword();
+//encriptarPassword("abc");

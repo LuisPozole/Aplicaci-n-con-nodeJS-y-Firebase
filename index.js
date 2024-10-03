@@ -1,14 +1,16 @@
 const express = require("express");
-const usuariosRutas = require("./rutas/rutasUsuarios");
-const productosRutas = require("./rutas/rutasProductos");
-
 const app = express();
-app.use(express.urlencoded({extended:true}));
+const usuariosRutas = require("./routes/RutasUsuarios");
+const productosRutas = require("./routes/rutasProducto");
+const ventasRutas = require("./routes/RutasVentas");
+
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/", usuariosRutas);
 app.use("/", productosRutas);
+app.use("/", ventasRutas);
 
-const port = process.env.PORT || 3000;
-app.listen(port, ()=>{
-    console.log("Servidor en http://localhost:"+port)
-})
+const port=process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log("Servidor en https://localhost:"+port);
+});
